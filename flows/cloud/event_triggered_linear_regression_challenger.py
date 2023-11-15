@@ -50,11 +50,11 @@ class TaxiFarePrediction(FlowSpec):
     @step
     def linear_model(self):
         "Fit a single variable, linear model to the data."
-        from sklearn.linear_model import LinearRegression
+        from sklearn.linear_model import Ridge
 
         # TODO: Play around with the model if you are feeling it.
-        self.model = LinearRegression()
-
+        self.model = Ridge(alpha=1.0)
+        self.model.fit(self.X, self.y)
         self.next(self.validate)
 
     def gather_sibling_flow_run_results(self):
